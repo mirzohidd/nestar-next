@@ -34,7 +34,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 		},
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			console.log("ddd",data)
+			
 			setTrendProperties(data?.getProperties?.list);
 		},
 	});
