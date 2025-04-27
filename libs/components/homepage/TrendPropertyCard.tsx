@@ -22,7 +22,10 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 	const user = useReactiveVar(userVar);
 
 	/** HANDLERS **/
-
+	const pushDetailHandler = async (propertyId: string) => {
+		console.log('id', propertyId);
+		await router.push(`property/detail?id=${propertyId}`);
+	};
 	if (device === 'mobile') {
 		return (
 			<Stack className="trend-card-box" key={property._id}>
@@ -30,11 +33,14 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
+					onClick={() => pushDetailHandler(property._id)}
 				>
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property.propertyTitle}</strong>
+					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>
+						{property.propertyTitle}
+					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
@@ -57,11 +63,11 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 							{property.propertyBarter ? 'Barter' : ''}
 						</p>
 						<div className="view-like-box">
-							<IconButton color={'default'} >
+							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'}  onClick={() => likePropertyHandler(user, property?._id)}>
+							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (
@@ -81,11 +87,14 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
+					onClick={() => pushDetailHandler(property._id)}
 				>
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property.propertyTitle}</strong>
+					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>
+						{property.propertyTitle}
+					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
