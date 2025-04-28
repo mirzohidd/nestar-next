@@ -644,7 +644,11 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										{destinationProperties.map((property: Property) => {
 											return (
 												<SwiperSlide className={'similar-homes-slide'} key={property.propertyTitle}>
-													<PropertyBigCard property={property} key={property?._id} />
+													<PropertyBigCard
+														property={property}
+														key={property?._id}
+														likePropertyHandler={likePropertyHandler}
+													/>
 												</SwiperSlide>
 											);
 										})}

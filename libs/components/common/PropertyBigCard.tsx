@@ -10,13 +10,15 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { T } from '../../types/common';
 
 interface PropertyBigCardProps {
 	property: Property;
+	likePropertyHandler: any;
 }
 
 const PropertyBigCard = (props: PropertyBigCardProps) => {
-	const { property } = props;
+	const { property, likePropertyHandler } = props;
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
@@ -75,8 +77,9 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
 							<IconButton
 								color={'default'}
-								onClick={(e) => {
+								onClick={(e: T) => {
 									e.stopPropagation();
+									likePropertyHandler(user, property?._id);
 								}}
 							>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
