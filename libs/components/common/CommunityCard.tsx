@@ -11,14 +11,16 @@ import IconButton from '@mui/material/IconButton';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { T } from '../../types/common';
 
 interface CommunityCardProps {
 	boardArticle: BoardArticle;
 	size?: string;
+	likeArticleHandler?: any;
 }
 
 const CommunityCard = (props: CommunityCardProps) => {
-	const { boardArticle, size = 'normal' } = props;
+	const { boardArticle, size = 'normal', likeArticleHandler } = props;
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
@@ -28,6 +30,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 
 	/** HANDLERS **/
 	const chooseArticleHandler = (e: React.SyntheticEvent, boardArticle: BoardArticle) => {
+		e.preventDefault();
 		router.push(
 			{
 				pathname: '/community/detail',
@@ -50,7 +53,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 			<Stack
 				sx={{ width: size === 'small' ? '285px' : '317px' }}
 				className="community-general-card-config"
-				onClick={(e) => chooseArticleHandler(e, boardArticle)}
+				onClick={(e: any) => chooseArticleHandler(e, boardArticle)}
 			>
 				<Stack className="image-box">
 					<img src={imagePath} alt="" className="card-img" />
@@ -59,7 +62,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 					<Stack>
 						<Typography
 							className="desc"
-							onClick={(e) => {
+							onClick={(e: T) => {
 								e.stopPropagation();
 								goMemberPage(boardArticle?.memberData?._id as string);
 							}}
@@ -73,7 +76,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 							<RemoveRedEyeIcon />
 						</IconButton>
 						<Typography className="view-cnt">{boardArticle?.articleViews}</Typography>
-						<IconButton color={'default'}>
+						<IconButton color={'default'} onClick={(e: any) => likeArticleHandler(e, user, boardArticle?._id)}>
 							{boardArticle?.meLiked && boardArticle?.meLiked[0]?.myFavorite ? (
 								<FavoriteIcon color={'primary'} />
 							) : (
