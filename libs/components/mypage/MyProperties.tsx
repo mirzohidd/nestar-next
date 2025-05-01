@@ -11,7 +11,7 @@ import { PropertyStatus } from '../../enums/property.enum';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
 import { GET_AGENT_PROPERTIES } from '../../../apollo/user/query';
-import { UPDATE_PROPERTY } from '../../../apollo/user/mutation';
+import { CREATE_PROPERTY, UPDATE_PROPERTY } from '../../../apollo/user/mutation';
 import { sweetConfirmAlert, sweetErrorHandling } from '../../sweetAlert';
 import { stat } from 'fs';
 
@@ -24,6 +24,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 	const router = useRouter();
 
 	/** APOLLO REQUESTS **/
+	
 	const [updateProperty] = useMutation(UPDATE_PROPERTY);
 	const {
 		loading: getAgentPropertiesLoading,
