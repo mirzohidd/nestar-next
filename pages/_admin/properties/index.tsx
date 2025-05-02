@@ -109,7 +109,7 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 						input: id,
 					},
 				});
-				getAllPropertiesRefetch({ input: propertiesInquiry });
+				await getAllPropertiesRefetch({ input: propertiesInquiry });
 			}
 			menuIconCloseHandler();
 		} catch (err: any) {
