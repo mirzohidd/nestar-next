@@ -52,7 +52,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setAgents(data?.getAgents?.list);
-			setTotal(data?.getAgents?.metaCounter[0]?.total);
+			setTotal(data?.getAgents?.metaCounter[0]?.total ?? 0);
 		},
 	});
 
